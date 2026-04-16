@@ -1,16 +1,12 @@
 {
   "name": "baidaho-backend",
   "version": "1.0.0",
-  "description": "Baidaho e-commerce backend",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "Baidaho",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
