@@ -1,38 +1,56 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import connectDB from './config/db.js'
-import authRoutes from './routes/authRoutes.js'
-import productRoutes from './routes/productRoutes.js'
-import orderRoutes from './routes/orderRoutes.js'
-import notFoundMiddleware from './middleware/notFoundMiddleware.js'
-import errorMiddleware from './middleware/errorMiddleware.js'
 
 dotenv.config()
-connectDB()
 
 const app = express()
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
-    credentials: true,
-  })
-)
-
+app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   res.send('Baidaho API is running...')
 })
 
-app.use('/api/auth', authRoutes)
-app.use('/api/products', productRoutes)
-app.use('/api/orders', orderRoutes)
+app.get('/api/products', (req, res) => {
+  res.json([
+    {
+      _id: '1',
+      name: 'Baidaho Laptop',
+      price: 999,
+      category: 'Electronics',
+      image: 'https://images.unsplash.com/photo-1517336714739-489689fd1ca8',
+      description: 'A powerful laptop for work and study.',
+    },
+  ])
+})
 
-app.use(notFoundMiddleware)
-app.use(errorMiddleware)
+app.post('/api/auth/signup', (req, res) => {
+  res.json({ message: 'Signup route works' })
+})
+
+app.post('/api/auth/login', (req, res) => {
+  res.json({
+    _id: '123',
+    name: 'Baidaho',
+    email: 'test@test.com',
+    role: 'admin',
+    token: 'fake-jwt-token',
+  })
+})
+
+app.post('/api/orders', (req, res) => {
+  res.json({ message: 'Order created successfully' })
+})
+
+app.get('/api/orders/my-orders', (req, res) => {
+  res.json([])
+})
+
+app.get('/api/orders', (req, res) => {
+  res.json([])
+})
 
 const PORT = process.env.PORT || 5000
 
