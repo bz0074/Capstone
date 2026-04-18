@@ -1,3 +1,7 @@
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
 console.log("🔥 RUNNING FILE:", __filename);
 import express from 'express'
 import dotenv from 'dotenv'
