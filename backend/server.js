@@ -52,7 +52,7 @@ app.get('/api/orders', (req, res) => {
   res.json([])
 })
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5001;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
